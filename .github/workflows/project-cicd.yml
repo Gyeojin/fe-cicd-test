@@ -13,7 +13,7 @@ env:
   AWS_REGION: ${{ vars.AWS_REGION }}
   S3_BUCKET: ${{ vars.S3_BUCKET }}
   SOURCE_DIR: ./dist
-  # DISTRIBUTION_ID: ${{ vars.CLOUDFRONT_DISTRIBUTION_ID }}
+  DISTRIBUTION_ID: ${{ vars.CLOUDFRONT_DISTRIBUTION_ID }}
 
 jobs:
   deploy:
@@ -47,8 +47,8 @@ jobs:
             s3://$S3_BUCKET \
             --delete
 
-      # - name: CloudFront Invalidation
-      #   run: |
-      #     aws cloudfront create-invalidation \
-      #       --distribution-id $DISTRIBUTION_ID \
-      #       --paths "/*"
+      - name: CloudFront Invalidation
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id $DISTRIBUTION_ID \
+            --paths "/*"
